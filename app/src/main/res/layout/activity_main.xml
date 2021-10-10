@@ -16,14 +16,14 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/phoneNumber"
+        android:id="@+id/editPhoneNum"
         android:inputType="phone"
         android:hint="phoneNum">
     </EditText>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/email"
+        android:id="@+id/editEmail"
         android:inputType="textEmailAddress"
         android:hint="Email">
     </EditText>
