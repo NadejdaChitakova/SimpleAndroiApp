@@ -10,18 +10,18 @@ import android.widget.Toast;
 
 public class DBActivity extends AppCompatActivity {
     //protected String dbFile = getFilesDir().getPath()+"Contacts.db"; //comment this
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-    public interface OnQuerySuccess{
+    protected  interface OnQuerySuccess{
         public void onSuccess();
     }
-    public interface OnSelectSuccess{
+    protected  interface OnSelectSuccess{
         public void onElementSelected(String id, String name, String phoneNum, String email);
     }
-    public void selectSQL(String selectQ, String[] args, OnSelectSuccess onSelectSuccess)throws Exception{
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    protected void SelectSQL(String selectQ, String[] args, OnSelectSuccess onSelectSuccess)throws Exception{
         SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(getFilesDir().getPath()+"/CONTACTS.db",null);
         Cursor cursor = db.rawQuery(selectQ, args);
 
@@ -34,16 +34,16 @@ public class DBActivity extends AppCompatActivity {
         }
         db.close();
     }
-    public void ExecSQL(String SQL, Object[] args, OnQuerySuccess onQuerySuccess)throws Exception{
+    protected void ExecSQL(String SQL, Object[] args, OnQuerySuccess onQuerySuccess) throws Exception{
         SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(getFilesDir().getPath()+"/CONTACTS.db",null);
-        if (args != null)//todo use ternary operator if possible
+        if (args != null)
             db.execSQL(SQL, args);
         else
             db.execSQL(SQL);
         db.close();
         onQuerySuccess.onSuccess();
     }
-    public void InitDB()throws Exception{
+    protected  void InitDB() throws Exception{
         ExecSQL("CREATE TABLE IF NOT EXIST CONTACTS(" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT NOT NULL," +
