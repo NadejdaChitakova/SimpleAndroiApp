@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends DBActivity {
     protected EditText editName, editPhoneNum, editEmail;
-    protected Button btnInsert;
+    protected Button submit;
     protected ListView simpleList;
 
     public void FillListView() throws Exception{
@@ -39,7 +39,7 @@ public class MainActivity extends DBActivity {
         editName = findViewById(R.id.editName);
         editPhoneNum = findViewById(R.id.editPhoneNum);
         editEmail = findViewById(R.id.editEmail);
-        btnInsert = findViewById(R.id.btnInsert);
+        submit = findViewById(R.id.btnSubmit);
         simpleList = findViewById(R.id.simpleList);
         try {
             InitDB();
@@ -48,13 +48,13 @@ public class MainActivity extends DBActivity {
         catch (Exception e){
             e.printStackTrace();
         }
-        btnInsert.setOnClickListener(view -> {
+        submit.setOnClickListener(view -> {
             try {
-                ExecSQL("INSERT INTO CONTACTS(NAME, PHONE_NUM, EMAIL) VALUES(?,?,?) ",
+                ExecSQL("INSERT INTO CONTACTS(NAME, PHONE_NUM, EMAIL) VALUES(?,?,?)",
                         new Object[]{
-                        editName.getText().toString(),
-                        editPhoneNum.getText().toString(),
-                        editEmail.getText().toString()},
+                                editName.getText().toString(),
+                                editPhoneNum.getText().toString(),
+                                editEmail.getText().toString()},
                         () -> Toast.makeText(getApplicationContext(),
                                 "Record inserted", Toast.LENGTH_LONG).show());
                 FillListView();

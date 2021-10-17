@@ -44,11 +44,11 @@ public class DBActivity extends AppCompatActivity {
         onQuerySuccess.onSuccess();
     }
     protected  void InitDB() throws Exception{
-        ExecSQL("CREATE TABLE IF NOT EXIST CONTACTS(" +
+        ExecSQL("CREATE TABLE IF NOT EXISTS CONTACTS(" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT NOT NULL," +
-                "PHONE_NUM NOT NULL," +
-                "EMAIL NOT NULL," +
+                "PHONE_NUM TEXT NOT NULL," +
+                "EMAIL TEXT NOT NULL," +
                 "UNIQUE(NAME, PHONE_NUM))",null, () ->Toast.makeText(getApplicationContext(),"DB Init successful", Toast.LENGTH_LONG).show());
     }
 }
